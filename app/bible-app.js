@@ -111,8 +111,13 @@
     '#ebc-bible.t-sepia{--bg:#f7f0e3;--card:#fbf6ec;--line:#e6d9c3;--ink:#3b2f22;--mut:#82735f}',
     '#ebc-bible.t-dark{--bg:#17131a;--card:#211b24;--line:#3a2f3e;--ink:#ece4ea;--mut:#a597a0;--rosel:#3a2533;--jesus:#ff8fa8;--plum:#d9a6c6;--plum2:#e8bcd8}',
     '#ebc-bible *{box-sizing:border-box}',
+    '#ebc-bible .eb-text p,#ebc-bible .eb-p{font-size:inherit!important;line-height:inherit!important;font-family:inherit!important;color:inherit!important;margin:0 0 .55em!important;text-align:left}',
+    '#ebc-bible .eb-text{line-height:1.85!important}',
+    '#ebc-bible h2,#ebc-bible h3,#ebc-bible h4,.eb-panel h3,.eb-panel h4,.eb-mbox h3,.eb-mbox h4{text-transform:none;letter-spacing:normal;line-height:1.15;padding:0;border:0;background:none}',
+    '#ebc-bible .eb-pb p,.eb-panel p{font-size:15px;line-height:1.6;margin:0 0 10px}',
+    '#ebc-bible button,.eb-panel button,.eb-bar button,.eb-mbox button{text-transform:none;letter-spacing:normal;box-shadow:none;line-height:1.2}',
     '#ebc-bible button{font-family:inherit;cursor:pointer}',
-    '.eb-top{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;background:linear-gradient(135deg,#4b1d3f,#7a3a66);color:#fff}',
+    '.eb-top{position:sticky;top:var(--ebtop,0px);z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;background:linear-gradient(135deg,#4b1d3f,#7a3a66);color:#fff}',
     '.eb-brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:700;letter-spacing:.3px;margin-right:6px;white-space:nowrap;cursor:pointer}',
     '.eb-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:7px 13px;font-size:14px;font-weight:500;white-space:nowrap}',
     '.eb-pill:hover{background:rgba(255,255,255,.22)}',
@@ -220,7 +225,7 @@
     var panel = el('div', 'eb-panel'); panel.innerHTML = '<div class="eb-ph"><h3></h3><button aria-label="' + esc(T.close) + '">✕</button></div><div class="eb-pb"></div>'; document.body.appendChild(panel);
     panel.querySelector('.eb-ph button').onclick = closePanel;
     ['t-light', 't-sepia', 't-dark'].forEach(function (c) { panel.classList.remove(c); });
-    UI.top = top; UI.read = $('.eb-read', main); UI.bar = bar; UI.panel = panel;
+    UI.top = top; UI.read = $('.eb-read', main); headerOffset(); window.addEventListener('resize', headerOffset); UI.bar = bar; UI.panel = panel;
     applyPrefs();
     var vs = $('.eb-ver', top), ps = $('.eb-par', top);
     var opts = META.versions.map(function (v) { return '<option value="' + v.id + '">' + esc(v.short + ' · ' + v.name) + '</option>'; });
@@ -250,6 +255,14 @@
     });
   }
   var UI = {};
+  function headerOffset() {
+    var h = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('header,nav,.navbar,#header,.header'), function (e) {
+      var s = getComputedStyle(e); if ((s.position === 'fixed' || s.position === 'sticky') && e.getBoundingClientRect().top <= 1) h = Math.max(h, e.offsetHeight);
+    });
+    ROOT.style.setProperty('--ebtop', h + 'px'); return h;
+  }
+  function scrollToRoot() { var h = headerOffset(); var y = ROOT.getBoundingClientRect().top + window.scrollY - h - 8; if (Math.abs(window.scrollY - y) > 40) window.scrollTo({ top: y, behavior: 'smooth' }); }
   function applyPrefs() {
     ROOT.classList.remove('t-light', 't-sepia', 't-dark', 'f-serif', 'f-sans', 'red', 'nonum');
     ROOT.classList.add('t-' + prefs.theme, 'f-' + prefs.font);
@@ -330,7 +343,7 @@
         var first = null;
         $$('.eb-col:first-child .eb-v', UI.read).forEach(function (x) { var n = +x.getAttribute('data-v'); if (n >= a && n <= z) { x.classList.add('flash'); if (!first) first = x; } });
         if (first) setTimeout(function () { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
-      } else { ROOT.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      } else { scrollToRoot(); }
       bindRead();
       updateMeta(b, c);
     }).catch(function () { UI.read.innerHTML = '<p class="eb-muted">Erreur de chargement.</p>'; });
