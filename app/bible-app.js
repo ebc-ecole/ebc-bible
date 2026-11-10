@@ -20,7 +20,7 @@
       close: 'Fermer', prev: 'Précédent', next: 'Suivant', loading: 'Chargement…', results: 'résultats', result: 'résultat',
       noresult: 'Aucun résultat.', all: 'Toute la Bible', occurrences: 'occurrences', seeocc: 'Voir les versets',
       strongword: 'Mot original', translit: 'Translittération', pron: 'Prononciation', def: 'Définition (Strong)',
-      kjvdef: 'Traduit dans la KJV par', deriv: 'Origine', lexnote: 'Définitions du dictionnaire Strong (1890), en anglais.',
+      kjvdef: 'Traduit dans la KJV par', deriv: 'Origine', lexnote: 'Dictionnaire Strong (1890), définitions traduites en français. Le « Traduit dans la KJV par » reprend les mots anglais de la King James.',
       originalverse: 'Mots originaux du verset', origfrom: 'D’après le texte de la King James annoté Strong.',
       mystudy: 'Mon étude', highlights: 'Surlignages', notes: 'Notes', favorites: 'Favoris', history: 'Historique',
       empty: 'Rien pour l’instant.', votd: 'Verset du jour', plans: 'Plans de lecture', listen: 'Écouter', stop: 'Arrêter',
@@ -182,6 +182,7 @@
     '.eb-lr{font-weight:600;color:var(--plum2);font-size:13.5px;display:block;margin-bottom:2px}',
     '.eb-li mark{background:rgba(255,221,87,.6);color:inherit;border-radius:3px;padding:0 1px}',
     '.eb-muted{color:var(--mut);font-size:13.5px}',
+    '.eb-orig{margin:-4px 0 10px}.eb-orig summary{cursor:pointer;color:var(--mut);font-size:13px}',
     '.eb-modal{position:fixed;inset:0;z-index:2147483002;background:rgba(30,15,25,.55);display:flex;align-items:flex-start;justify-content:center;padding:40px 12px;overflow:auto}',
     '.eb-mbox{background:var(--card);color:var(--ink);border-radius:20px;max-width:880px;width:100%;padding:20px 22px;box-shadow:0 20px 60px rgba(0,0,0,.3)}',
     '.eb-mbox h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;color:var(--plum);margin:6px 0 12px}',
@@ -499,9 +500,10 @@
       '<div class="eb-lemma" lang="' + (s[0] === 'G' ? 'el' : 'he') + '">' + esc(e.l) + '</div>' +
       '<div class="eb-kv" style="margin-top:10px"><span>' + esc(T.translit) + '</span><span><b>' + esc(e.t) + '</b></span>' +
       (e.p ? '<span>' + esc(T.pron) + '</span><span>' + esc(e.p) + '</span>' : '') +
-      '<span>Strong</span><span>' + esc(s) + ' · ' + (s[0] === 'G' ? 'grec' : (LANG === 'fr' ? 'hébreu' : 'Hebrew')) + '</span>' +
+      '<span>Strong</span><span>' + esc(s) + ' · ' + (s[0] === 'G' ? (LANG === 'fr' ? 'grec' : 'Greek') : (LANG === 'fr' ? 'hébreu' : 'Hebrew')) + '</span>' +
       '<span>' + esc(T.occurrences) + '</span><span>' + e.n + '</span></div>' +
-      '<h4>' + esc(T.def) + '</h4><p>' + esc(e.d) + '</p>' +
+      '<h4>' + esc(T.def) + '</h4><p>' + esc(LANG === 'fr' && e.f ? e.f : e.d) + '</p>' +
+      (LANG === 'fr' && e.f && e.d ? '<details class="eb-orig"><summary>Définition originale (anglais)</summary><p class="eb-muted">' + esc(e.d) + '</p></details>' : '') +
       (e.k ? '<h4>' + esc(T.kjvdef) + '</h4><p>' + esc(e.k) + '</p>' : '') +
       (e.o ? '<h4>' + esc(T.deriv) + '</h4><p>' + linkStrong(esc(e.o)) + '</p>' : '') +
       '<p class="eb-muted" style="margin-top:14px">' + esc(T.lexnote) + '</p>' +
