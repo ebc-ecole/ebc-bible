@@ -121,7 +121,7 @@
     '#ebc-bible .eb-pb p,.eb-panel p{font-size:15px;line-height:1.6;margin:0 0 10px}',
     '#ebc-bible button,.eb-panel button,.eb-bar button,.eb-mbox button{text-transform:none;letter-spacing:normal;box-shadow:none;line-height:1.2}',
     '#ebc-bible button{font-family:inherit;cursor:pointer}',
-    '.eb-top{border-radius:18px 18px 0 0;position:sticky;top:var(--ebtop,0px);z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;background-color:#3a1532;background-image:radial-gradient(38% 70% at 15% 30%,rgba(183,112,143,.55),rgba(183,112,143,0) 70%),radial-gradient(34% 65% at 85% 70%,rgba(143,174,150,.55),rgba(143,174,150,0) 72%),radial-gradient(28% 60% at 55% 0%,rgba(214,178,104,.30),rgba(214,178,104,0) 70%),linear-gradient(115deg,#2a0f26,#4b1d3f 45%,#5a2a4c 70%,#3b2a33);background-size:220% 220%,220% 220%,220% 220%,100% 100%;animation:ebaurora 18s ease-in-out infinite alternate;color:#fff;overflow:hidden}',
+    '.eb-top{border-radius:18px 18px 0 0;position:relative;z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;background-color:#3a1532;background-image:radial-gradient(38% 70% at 15% 30%,rgba(183,112,143,.55),rgba(183,112,143,0) 70%),radial-gradient(34% 65% at 85% 70%,rgba(143,174,150,.55),rgba(143,174,150,0) 72%),radial-gradient(28% 60% at 55% 0%,rgba(214,178,104,.30),rgba(214,178,104,0) 70%),linear-gradient(115deg,#2a0f26,#4b1d3f 45%,#5a2a4c 70%,#3b2a33);background-size:220% 220%,220% 220%,220% 220%,100% 100%;animation:ebaurora 18s ease-in-out infinite alternate;color:#fff;overflow:hidden}',
     '.eb-top>*:not(.eb-stars),.eb-ph>*:not(.eb-stars){position:relative;z-index:1}.eb-stars{position:absolute;left:0;top:0;pointer-events:none;z-index:0;display:block}',
     '@keyframes ebsky{0%{background-position:0% 50%}100%{background-position:100% 50%}}@keyframes ebaurora{0%{background-position:0% 0%,100% 100%,40% 0%,0 0}33%{background-position:60% 40%,30% 60%,90% 30%,0 0}66%{background-position:100% 80%,0% 20%,20% 70%,0 0}100%{background-position:30% 100%,70% 0%,70% 10%,0 0}}@keyframes ebshine{0%{background-position:160% 0}100%{background-position:-60% 0}}@keyframes ebtw{0%,100%{opacity:1;transform:scale(1) rotate(0deg)}50%{opacity:.55;transform:scale(.78) rotate(25deg)}}@keyframes ebglow{0%{opacity:.55;transform:scale(1)}100%{opacity:1;transform:scale(1.18)}}',
     '.eb-brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:700;letter-spacing:.3px;margin-right:6px;white-space:nowrap;cursor:pointer;background:linear-gradient(90deg,#fff 0%,#fff 38%,#ffe2a0 50%,#fff 62%,#fff 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ebshine 7s linear infinite}',
@@ -881,7 +881,7 @@
       if (bk) {
         var id = bk.getAttribute('data-bk'); if (BOOKS[id].ch === 1) return onPick(id, 1);
         box.innerHTML = chapHTML(id); box.setAttribute('data-book', id);
-        var top = box.getBoundingClientRect().top, sc = box.closest('.eb-modal'), off = sc ? 16 : ((UI.top ? UI.top.offsetHeight : 0) + (parseInt(getComputedStyle(ROOT).getPropertyValue('--ebtop'), 10) || 0) + 14);
+        var top = box.getBoundingClientRect().top, sc = box.closest('.eb-modal'), off = sc ? 16 : ((parseInt(getComputedStyle(ROOT).getPropertyValue('--ebtop'), 10) || 0) + 14);
         if (top < off || top > window.innerHeight * 0.6) { if (sc) sc.scrollTop += top - off; else window.scrollTo({ top: window.scrollY + top - off, behavior: 'smooth' }); }
         return;
       }
