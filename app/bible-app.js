@@ -21,8 +21,8 @@
       close: 'Fermer', prev: 'Précédent', next: 'Suivant', loading: 'Chargement…', results: 'résultats', result: 'résultat',
       noresult: 'Aucun résultat.', all: 'Toute la Bible', occurrences: 'occurrences', seeocc: 'Voir les versets',
       strongword: 'Mot original', translit: 'Translittération', pron: 'Prononciation', def: 'Définition (Strong)',
-      kjvdef: 'Traduit dans la KJV par', deriv: 'Origine', lexnote: 'Dictionnaire Strong (1890), définitions traduites en français. Le « Traduit dans la KJV par » reprend les mots anglais de la King James.',
-      originalverse: 'Mots originaux du verset', origfrom: 'D’après le texte de la King James annoté Strong.',
+      kjvdef: 'Traduit dans la KJV par', deriv: 'Origine', lexnote: 'Dictionnaire Strong (1890), traduit en français.',
+      originalverse: 'Mots originaux du verset', origfrom: 'Les mots grecs et hébreux sont repérés grâce à la numérotation Strong.',
       mystudy: 'Mon étude', highlights: 'Surlignages', notes: 'Notes', favorites: 'Favoris', history: 'Historique',
       empty: 'Rien pour l’instant.', votd: 'Verset du jour', plans: 'Plans de lecture', listen: 'Écouter', stop: 'Arrêter',
       plan1: 'La Bible en un an', plan2: 'Le Nouveau Testament en 90 jours', plan3: 'Psaumes et Proverbes en 31 jours',
@@ -617,19 +617,42 @@
       (e.p ? '<span>' + esc(T.pron) + '</span><span>' + esc(e.p) + '</span>' : '') +
       '<span>Strong</span><span>' + esc(s) + ' · ' + (s[0] === 'G' ? (LANG === 'fr' ? 'grec' : 'Greek') : (LANG === 'fr' ? 'hébreu' : 'Hebrew')) + '</span>' +
       '<span>' + esc(T.occurrences) + '</span><span>' + e.n + '</span></div>' +
-      '<h4>' + esc(T.def) + '</h4><p>' + esc(LANG === 'fr' && e.f ? e.f : e.d) + '</p>' +
-      (LANG === 'fr' && e.f && e.d ? '<details class="eb-endef"><summary>Définition originale (anglais)</summary><p class="eb-muted">' + esc(e.d) + '</p></details>' : '') +
+      (LANG === 'fr' ? lexFr(e) :
+      '<h4>' + esc(T.def) + '</h4><p>' + esc(e.d) + '</p>' +
       (e.k ? '<h4>' + esc(T.kjvdef) + '</h4><p>' + esc(e.k) + '</p>' : '') +
-      (e.o ? '<h4>' + esc(T.deriv) + '</h4><p>' + linkStrong(esc(e.o)) + '</p>' : '') +
+      (e.o ? '<h4>' + esc(T.deriv) + '</h4><p>' + linkStrong(esc(e.o)) + '</p>' : '')) +
       '<p class="eb-muted" style="margin-top:14px">' + esc(T.lexnote) + '</p>' +
       '<p><button class="eb-btn pri" data-occ="' + s + '">' + esc(T.seeocc) + ' (' + e.n + ')</button></p><div class="eb-occ"></div>';
   }
+  function frOrig(o) {
+    if (!o) return '';
+    var lab = [], refs = o.match(/[GH]\d+(?:\s*\([^)]*\))?/g) || [];
+    if (/Hebrew origin/i.test(o)) lab.push('D’origine hébraïque');
+    if (/Chaldee|Aramaic/i.test(o)) lab.push('Araméen');
+    if (/Latin origin/i.test(o)) lab.push('D’origine latine');
+    if (/foreign origin/i.test(o)) lab.push('D’origine étrangère');
+    if (/primitive root/i.test(o)) lab.push('Racine primitive'); else if (/primitive|primary/i.test(o)) lab.push('Mot primitif');
+    if (/uncertain|unknown/i.test(o)) lab.push('Origine incertaine');
+    if (refs.length) {
+      var rel = /plural of/i.test(o) ? 'Pluriel de' : /feminine of/i.test(o) ? 'Féminin de' : /corresponding to/i.test(o) ? 'Correspond à' : /same as/i.test(o) ? 'Identique à' : /compare/i.test(o) && !/from/i.test(o) ? 'À comparer avec' : 'Vient de';
+      lab.push(rel + ' ' + refs.join(', '));
+    }
+    return lab.join(' · ');
+  }
+  function lexFr(e) {
+    var o = frOrig(e.o);
+    return '<h4>' + esc(T.def) + '</h4><p>' + esc(e.f || e.d) + '</p>' +
+      (o ? '<h4>' + esc(T.deriv) + '</h4><p>' + linkStrong(esc(o)) + '</p>' : '') +
+      ((e.d || e.k || e.o) ? '<details class="eb-endef"><summary>Données originales du dictionnaire (en anglais)</summary>' +
+        (e.d ? '<p class="eb-muted">Définition : ' + esc(e.d) + '</p>' : '') + (e.k ? '<p class="eb-muted">Traduit dans la King James par : ' + esc(e.k) + '</p>' : '') + (e.o ? '<p class="eb-muted">Origine : ' + esc(e.o) + '</p>' : '') + '</details>' : '');
+  }
+  function frGloss(e) { var t = (e && (e.f || '')).replace(/,?\s*c\.-à-d\..*$/, '').replace(/^(au sens propre|au figuré|proprement|littéralement),?\s*/i, '').split(/[;:.(]/)[0].replace(/[,\s]+$/, '').trim(); return t.length > 38 ? t.slice(0, 36) + '…' : t; }
   function linkStrong(h) { return h.replace(/\b([GH]\d{1,4})\b/g, '<button class="eb-chip" data-st="$1">$1</button>'); }
   function bindLex(pb, s) {
     pb.onclick = function (ev) {
       var st = ev.target.closest('[data-st]'); if (st) { strongPanel(st.getAttribute('data-st')); return; }
       var o = ev.target.closest('[data-occ]'); if (o) { o.disabled = true; occurrences(s, $('.eb-occ', pb)); return; }
-      var r = ev.target.closest('[data-go]'); if (r) { var p = r.getAttribute('data-go').split('.'); closePanel(); S.v = 'kjv'; $('.eb-ver', UI.top).value = 'kjv'; go(p[0], p[1], p[2]); }
+      var r = ev.target.closest('[data-go]'); if (r) { var p = r.getAttribute('data-go').split('.'); closePanel(); if (LANG !== 'fr') { S.v = 'kjv'; $('.eb-ver', UI.top).value = 'kjv'; } else if (VERS[S.v].lang !== 'fr') { S.v = 'lsg'; $('.eb-ver', UI.top).value = 'lsg'; } go(p[0], p[1], p[2]); }
     };
   }
   function occurrences(s, box) {
@@ -639,10 +662,13 @@
       var refs = d[s] || [], shown = 0;
       function more() {
         var part = refs.slice(shown, shown + 40); shown += part.length;
-        Promise.all(part.map(function (k) { return getVerse('kjv', k).then(function (t) { return [k, t]; }); })).then(function (rows) {
+        Promise.all(part.map(function (k) {
+          if (LANG === 'fr') return mapKey(k, 'en', 'fr').then(function (fk) { return getVerse('lsg', fk).then(function (t) { return [fk, t]; }); });
+          return getVerse('kjv', k).then(function (t) { return [k, t]; });
+        })).then(function (rows) {
           var h = rows.map(function (r) {
-            var p = r[0].split('.'), txt = esc(r[1]).replace(/\[([^\]|]+)\|([GH]\d+)\]/g, function (m, w, ss) { return ss === s ? '<mark>' + w + '</mark>' : w; }).replace(/[‹›]/g, '');
-            return '<div class="eb-li" data-go="' + r[0] + '"><span class="eb-lr">' + esc(BOOKS[p[0]].en + ' ' + p[1] + ':' + p[2]) + '</span>' + txt + '</div>';
+            var p = r[0].split('.'), txt = LANG === 'fr' ? esc(plain(r[1] || '')) : esc(r[1]).replace(/\[([^\]|]+)\|([GH]\d+)\]/g, function (m, w, ss) { return ss === s ? '<mark>' + w + '</mark>' : w; }).replace(/[‹›]/g, '');
+            return '<div class="eb-li" data-go="' + r[0] + '"><span class="eb-lr">' + esc(LANG === 'fr' ? BOOKS[p[0]].fr + ' ' + p[1] + '.' + p[2] : BOOKS[p[0]].en + ' ' + p[1] + ':' + p[2]) + '</span>' + txt + '</div>';
           }).join('');
           var old = $('.eb-more', box); if (old) old.remove();
           if (shown === part.length) box.innerHTML = '';
@@ -662,8 +688,12 @@
       var uniq = []; var seen = {};
       all.forEach(function (x) { if (!seen[x[1]]) { seen[x[1]] = 1; uniq.push(x); } });
       Promise.all(uniq.map(function (x) { return lexEntry(x[1]); })).then(function (es) {
-        pb.innerHTML = '<p class="eb-muted">' + esc(T.origfrom) + '</p><div class="eb-cmp"><b>KJV</b>' + esc(plain(rows.map(function (r) { return r[1]; }).join(' '))) + '</div><div class="eb-orig" style="margin-top:12px">' +
-          uniq.map(function (x, i) { var e = es[i] || {}; return '<div class="eb-ow" data-st="' + x[1] + '"><div class="g">' + esc(e.l || '') + '</div><div><b>' + esc(e.t || '') + '</b></div><div class="e">' + esc(x[0]) + '</div><div class="s">' + x[1] + '</div></div>'; }).join('') + '</div>';
+        var FRV = LANG === 'fr';
+        var vtxt = FRV ? Promise.all(keys.map(function (k) { return mapKey(k, from, 'fr').then(function (fk) { return getVerse('lsg', fk); }); })) : Promise.resolve(rows.map(function (r) { return r[1]; }));
+        vtxt.then(function (vt) {
+        pb.innerHTML = '<p class="eb-muted">' + esc(T.origfrom) + '</p><div class="eb-cmp"><b>' + (FRV ? 'Louis Segond' : 'KJV') + '</b>' + esc(plain(vt.join(' '))) + '</div><div class="eb-orig" style="margin-top:12px">' +
+          uniq.map(function (x, i) { var e = es[i] || {}; return '<div class="eb-ow" data-st="' + x[1] + '"><div class="g">' + esc(e.l || '') + '</div><div><b>' + esc(e.t || '') + '</b></div><div class="e">' + esc(FRV ? frGloss(e) : x[0]) + '</div><div class="s">' + x[1] + '</div></div>'; }).join('') + '</div>';
+        });
         pb.onclick = function (ev) { var st = ev.target.closest('[data-st]'); if (st) strongPanel(st.getAttribute('data-st')); };
       });
     });
