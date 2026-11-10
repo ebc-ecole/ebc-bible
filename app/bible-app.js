@@ -108,7 +108,7 @@
   /* ---------- Styles ---------- */
   var CSS = [
     '#ebc-bible,.eb-panel,.eb-mbox,.eb-bar{--plum:#4b1d3f;--plum2:#6d2f5c;--rose:#b7708f;--rosel:#f6e7ee;--sage:#5f826a;--gold:#a8843f;--goldl:#f7efdf;--navy:#4b1d3f;--indigo:#6d2f5c;--teal:#5f826a;--teall:#e9f1eb;--night:#2a0f26}#ebc-bible{--ink:#2a2026;--mut:#7d6f77;--bg:#fffdfb;--card:#ffffff;--line:#ecdfe6;--jesus:#a32847;',
-    'font-family:"Jost",system-ui,sans-serif;color:var(--ink);background:var(--bg);border-radius:18px;position:relative;max-width:1180px;margin:0 auto;min-height:70vh;box-shadow:0 10px 40px rgba(75,29,63,.08);overflow:clip}',
+    'font-family:"Jost",system-ui,sans-serif;color:var(--ink);background:var(--bg);border-radius:18px;position:relative;max-width:1180px;margin:34px auto 28px;min-height:70vh;box-shadow:0 10px 40px rgba(75,29,63,.08);overflow:clip}',
     '#ebc-bible.t-sepia{--bg:#f7f0e3;--card:#fbf6ec;--line:#e6d9c3;--ink:#3b2f22;--mut:#82735f}',
     '#ebc-bible.t-dark{--bg:#1a1218;--card:#241a22;--line:#3c2d38;--ink:#efe6ec;--mut:#a998a4;--rosel:#3a2533;--jesus:#ff8fa8;--plum:#d9a6c6;--plum2:#e8bcd8;--navy:#e4bdd6;--indigo:#e4bdd6;--teal:#a9cdb3;--teall:#25352b;--gold:#e2c27e;--goldl:#3a3020}',
     '#ebc-bible *{box-sizing:border-box}',
@@ -215,17 +215,48 @@
     '.eb-cmp{padding:10px 0;border-bottom:1px solid var(--line)}.eb-cmp b{display:block;font-size:12.5px;letter-spacing:.07em;color:var(--teal);margin-bottom:3px}',
     '.eb-orig{display:flex;flex-wrap:wrap;gap:8px}.eb-ow{border:1px solid var(--line);border-radius:12px;padding:8px 10px;cursor:pointer;background:var(--bg);min-width:90px}.eb-ow:hover{border-color:var(--teal)}',
     '.eb-ow .g{font-size:20px;font-family:"Times New Roman",serif;color:var(--navy)}.eb-ow .e{font-size:12.5px;color:var(--mut)}.eb-ow .s{font-size:11px;color:var(--gold);font-weight:600}',
-    '@media(max-width:760px){.eb-pr{gap:12px;font-size:.9em}.eb-read{padding:16px 14px 110px}.eb-cols.two{grid-template-columns:1fr}.eb-ctitle{font-size:28px}.eb-brand{font-size:20px}.eb-top{gap:6px;padding:10px}.eb-icons{margin-left:0}.eb-search{order:9;flex-basis:100%}}'
+    '@media(max-width:760px){.eb-pr{gap:12px;font-size:.9em}.eb-read{padding:16px 14px 110px}.eb-cols.two{grid-template-columns:1fr}.eb-ctitle{font-size:28px}.eb-brand{font-size:20px}.eb-top{gap:6px;padding:10px}.eb-icons{margin-left:0}.eb-search{order:9;flex-basis:100%}}',
+    '.eb-top,.eb-ph,.eb-hero{background-color:#fbf6f8;background-image:radial-gradient(40% 75% at 15% 30%,rgba(183,112,143,.20),rgba(183,112,143,0) 70%),radial-gradient(36% 70% at 85% 70%,rgba(143,174,150,.24),rgba(143,174,150,0) 72%),radial-gradient(30% 65% at 55% 0%,rgba(214,178,104,.20),rgba(214,178,104,0) 70%),linear-gradient(115deg,#fdf9f6,#f9eff4 50%,#f1f6f1);color:#4b1d3f}',
+    '.eb-top{border-bottom:1px solid var(--line)}.eb-hero{border:1px solid var(--line);box-shadow:0 12px 34px rgba(75,29,63,.08)}.eb-hero::after{background:radial-gradient(circle,rgba(214,178,104,.28),rgba(214,178,104,0) 68%)}',
+    '.eb-pill,.eb-ic{border-color:rgba(75,29,63,.16);background:rgba(255,255,255,.7);color:#4b1d3f}.eb-pill:hover,.eb-ic:hover{background:#fff;border-color:rgba(75,29,63,.3)}.eb-pill select{color:#4b1d3f}',
+    '.eb-search input{border:1px solid rgba(75,29,63,.16);border-right:0;background:#fff;color:var(--ink)}',
+    '.eb-brand{background-image:linear-gradient(90deg,#4b1d3f 0%,#4b1d3f 38%,#c49a4a 50%,#4b1d3f 62%,#4b1d3f 100%)}.eb-brand i{color:#b8902f;-webkit-text-fill-color:#b8902f;text-shadow:0 0 10px rgba(214,178,104,.55)}',
+    '.eb-ph h3{color:#4b1d3f!important}.eb-ph button{background:rgba(75,29,63,.08);color:#4b1d3f}',
+    '#ebc-bible .eb-hero h4{color:#a8843f!important}#ebc-bible .eb-hero .eb-votd{color:#3a1832;text-shadow:none}#ebc-bible .eb-hero .eb-vr{color:rgba(75,29,63,.62)!important}',
+    '#ebc-bible.t-dark .eb-top,#ebc-bible.t-dark .eb-hero{background-color:#2a0f26;background-image:radial-gradient(40% 75% at 15% 30%,rgba(183,112,143,.45),rgba(183,112,143,0) 70%),radial-gradient(36% 70% at 85% 70%,rgba(143,174,150,.4),rgba(143,174,150,0) 72%),linear-gradient(115deg,#2a0f26,#4b1d3f 50%,#3b2a33);color:#fff;border-color:transparent}',
+    '#ebc-bible.t-dark .eb-pill,#ebc-bible.t-dark .eb-ic{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff}#ebc-bible.t-dark .eb-pill select{color:#fff}#ebc-bible.t-dark .eb-brand{background-image:linear-gradient(90deg,#fff 0%,#fff 38%,#ffe2a0 50%,#fff 62%,#fff 100%)}#ebc-bible.t-dark .eb-hero .eb-votd{color:#fff}#ebc-bible.t-dark .eb-hero .eb-vr{color:rgba(255,255,255,.75)!important}',
+    '.eb-lib [hidden]{display:none!important}.eb-lib,.eb-chv{margin:6px 0 30px}',
+    '.eb-lib-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:20px}',
+    '.eb-lib-tabs{display:inline-flex;background:var(--rosel);border-radius:999px;padding:4px;gap:2px}.eb-lib-tabs button{border:0;background:transparent;color:var(--plum2);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:500;transition:background .2s,color .2s}.eb-lib-tabs button.on{background:var(--card);color:var(--plum);box-shadow:0 2px 8px rgba(75,29,63,.12)}',
+    '.eb-lib-find{flex:1 1 220px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 14px;min-width:0;margin:0}.eb-lib-find span{color:var(--mut)}.eb-lib-find input{flex:1;border:0!important;outline:0;background:transparent;font:inherit;font-size:15px;padding:10px 0;color:var(--ink);min-width:0;box-shadow:none!important}',
+    '.eb-lib-resume{border:0;border-radius:14px;padding:8px 16px;background:linear-gradient(135deg,#4b1d3f,#7a3a66 60%,#5f826a);color:#fff;font-size:14px;font-weight:600;text-align:left;line-height:1.25;box-shadow:0 6px 18px rgba(75,29,63,.2)}.eb-lib-resume small{display:block;font-size:11px;font-weight:500;opacity:.8;letter-spacing:.06em;text-transform:uppercase}',
+    '.eb-cat{margin:0 0 24px}.eb-cat-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 10px}.eb-cat-h .dot{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px var(--ct);align-self:center}.eb-cat-h b{font-family:"Cormorant Garamond",Georgia,serif;font-size:23px;color:var(--ink);font-weight:700}.eb-cat-h small{color:var(--mut);font-size:13px}',
+    '.eb-lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}',
+    '.eb-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;background:linear-gradient(160deg,var(--ct),rgba(255,255,255,0) 65%),var(--card);color:var(--ink);overflow:hidden;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s;animation:ebup .5s both;animation-delay:calc(var(--i) * 12ms)}',
+    '.eb-tile::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.6),rgba(255,255,255,0));transform:skewX(-18deg);transition:left .7s;pointer-events:none}',
+    '.eb-tile:hover,.eb-tile:focus-visible{transform:translateY(-4px);box-shadow:0 14px 30px rgba(75,29,63,.14);border-color:var(--c);outline:0}.eb-tile:hover::after{left:130%}',
+    '.eb-tile .ab{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;font-weight:700;line-height:1;color:var(--c)}.eb-tile .nm{font-weight:600;font-size:15.5px;margin-top:4px}',
+    '.eb-tile .sm{font-size:12.5px;line-height:1.35;color:var(--mut);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}',
+    '.eb-tile .mt{font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--c);margin-top:4px}.eb-tile .pg{align-self:stretch;height:3px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}.eb-tile .pg i{display:block;height:100%;background:var(--c)}',
+    '@keyframes ebup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}',
+    '.eb-chv{animation:ebup .35s both}.eb-back{border:0;background:transparent;color:var(--mut);font-size:14px;padding:4px 0;margin-bottom:10px}.eb-back:hover{color:var(--c)}',
+    '.eb-chv-h{display:flex;gap:18px;align-items:center;padding:20px;border-radius:20px;background:linear-gradient(135deg,var(--ct),rgba(255,255,255,0) 70%),var(--card);border:1px solid var(--line);margin-bottom:14px}',
+    '.eb-chv-h .ab{flex:0 0 auto;width:84px;height:84px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",Georgia,serif;font-size:32px;font-weight:700;color:#fff;background:var(--c);box-shadow:0 10px 26px var(--ct)}',
+    '.eb-chv-h small{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}#ebc-bible .eb-chv-h h3,.eb-mbox .eb-chv-h h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:34px;margin:2px 0 4px;color:var(--ink)}.eb-chv-h p{margin:0!important;color:var(--mut);font-size:15px}',
+    '.eb-chg{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;margin-top:14px}.eb-chg button{aspect-ratio:1;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px;font-weight:600;transition:transform .2s,background .2s,color .2s;animation:ebup .4s both;animation-delay:calc(var(--i) * 6ms)}.eb-chg button:hover{transform:scale(1.08);background:var(--c);color:#fff;border-color:var(--c)}.eb-chg button.rd{background:var(--ct);border-color:var(--c);color:var(--c)}.eb-chg button.cur{box-shadow:0 0 0 3px var(--c)}',
+    '.eb-mbox.wide{max-width:1100px}.t-dark .eb-tile::after{background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.12),rgba(255,255,255,0))}',
+    '@media(max-width:760px){.eb-lib-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eb-tile{padding:12px}.eb-tile .ab{font-size:26px}.eb-chv-h{padding:14px;gap:12px}.eb-chv-h .ab{width:64px;height:64px;font-size:24px;border-radius:18px}#ebc-bible .eb-chv-h h3,.eb-mbox .eb-chv-h h3{font-size:27px}.eb-lib-resume{width:100%}.eb-lib-tabs{width:100%;justify-content:space-between}.eb-lib-tabs button{padding:8px 10px;font-size:13px}#ebc-bible{margin-top:22px}}',
+    '@media (prefers-reduced-motion:reduce){.eb-tile,.eb-chv,.eb-chg button{animation:none}}'
   ].join('\n');
 
   /* ---------- Ciel étoilé animé ---------- */
-  function starfield(host, dens) {
+  function starfield(host, dens, light) {
     if (!host) return;
     var cv = document.createElement('canvas'); cv.className = 'eb-stars'; cv.setAttribute('aria-hidden', 'true');
     host.insertBefore(cv, host.firstChild);
     var ctx = cv.getContext && cv.getContext('2d'); if (!ctx) return;
     var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var COL = ['255,255,255', '255,255,255', '255,250,240', '255,232,170', '255,214,232', '214,240,220'];
+    var COL = light ? ['168,132,63', '168,132,63', '196,154,74', '183,112,143', '95,130,106', '122,58,102'] : ['255,255,255', '255,255,255', '255,250,240', '255,232,170', '255,214,232', '214,240,220'];
     var W = 0, H = 0, dpr = Math.min(2, window.devicePixelRatio || 1), stars = [], shoot = null, raf = 0, vis = true, last = 0, nextShoot = 0, ro = null, io = null;
     function size() {
       W = Math.max(1, host.clientWidth); H = Math.max(1, host.clientHeight);
@@ -297,11 +328,11 @@
       '<label class="eb-pill" title="' + esc(T.parallel) + '">⇆ <select class="eb-par" aria-label="' + esc(T.parallel) + '"></select></label>' +
       '<form class="eb-search"><input type="search" placeholder="' + esc(T.search) + '" aria-label="' + esc(T.search) + '"><button type="submit" aria-label="' + esc(T.go) + '">⌕</button></form>' +
       '<span class="eb-icons"><button class="eb-ic" data-a="listen" title="' + esc(T.listen) + '">🔊</button><button class="eb-ic" data-a="study" title="' + esc(T.mystudy) + '">★</button><button class="eb-ic" data-a="settings" title="' + esc(T.settings) + '">Aa</button></span>';
-    ROOT.appendChild(top); starfield(top, 700);
+    ROOT.appendChild(top); starfield(top, 900, true);
     var main = el('div', 'eb-main'); main.innerHTML = '<div class="eb-read"></div>'; ROOT.appendChild(main);
     var bar = el('div', 'eb-bar'); document.body.appendChild(bar);
     var panel = el('div', 'eb-panel'); panel.innerHTML = '<div class="eb-ph"><h3></h3><button aria-label="' + esc(T.close) + '">✕</button></div><div class="eb-pb"></div>'; document.body.appendChild(panel);
-    panel.querySelector('.eb-ph button').onclick = closePanel; starfield(panel.querySelector('.eb-ph'), 600);
+    panel.querySelector('.eb-ph button').onclick = closePanel; starfield(panel.querySelector('.eb-ph'), 800, true);
     ['t-light', 't-sepia', 't-dark'].forEach(function (c) { panel.classList.remove(c); });
     UI.top = top; UI.read = $('.eb-read', main); headerOffset(); window.addEventListener('resize', headerOffset); UI.bar = bar; UI.panel = panel;
     applyPrefs();
@@ -400,7 +431,7 @@
     UI.mode = 'read'; clearSel();
     S.b = b; S.c = c;
     $('.eb-cur', UI.top).textContent = refLabel(b, c);
-    hist = [b + '.' + c].concat(hist.filter(function (x) { return x !== b + '.' + c; })).slice(0, 30); store.set('hist', hist);
+    hist = [b + '.' + c].concat(hist.filter(function (x) { return x !== b + '.' + c; })).slice(0, 30); store.set('hist', hist); markRead(b, c);
     var vers = [S.v].concat(S.p && S.p !== S.v ? [S.p] : []);
     UI.read.innerHTML = '<p class="eb-muted">' + esc(T.loading) + '</p>';
     Promise.all(vers.map(function (v) { return getBook(v, b); }).concat([b === 'PSA' ? psOffsets() : Promise.resolve({})])).then(function (ds) {
@@ -529,7 +560,7 @@
     copyTheme(UI.panel);
     UI.panel.classList.add('on'); return pb;
   }
-  function copyTheme(node) { var cs = getComputedStyle(ROOT);['--bg', '--card', '--line', '--ink', '--mut', '--rosel', '--plum', '--plum2', '--rose', '--gold'].forEach(function (p) { node.style.setProperty(p, cs.getPropertyValue(p)); }); node.style.fontFamily = '"Jost",system-ui,sans-serif'; }
+  function copyTheme(node) { var cs = getComputedStyle(ROOT);['--bg', '--card', '--line', '--ink', '--mut', '--rosel', '--plum', '--plum2', '--rose', '--gold', '--goldl', '--navy', '--teal', '--teall', '--sage'].forEach(function (p) { node.style.setProperty(p, cs.getPropertyValue(p)); }); node.style.fontFamily = '"Jost",system-ui,sans-serif'; }
   function closePanel() { if (UI.panel) UI.panel.classList.remove('on'); }
 
   function getVerse(ver, key) {
@@ -699,6 +730,150 @@
     };
   }
 
+  /* ---------- Bibliothèque des livres (accueil + sélecteur) ---------- */
+  var CATS = [
+    { t: 'AT', c: '#a8843f', ct: 'rgba(168,132,63,.10)', fr: ['Pentateuque', 'La Loi de Moïse'], en: ['Pentateuch', 'The Law of Moses'], b: 'GEN EXO LEV NUM DEU' },
+    { t: 'AT', c: '#b7708f', ct: 'rgba(183,112,143,.10)', fr: ['Livres historiques', 'L’histoire d’Israël'], en: ['Historical books', 'The history of Israel'], b: 'JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST' },
+    { t: 'AT', c: '#5f826a', ct: 'rgba(95,130,106,.10)', fr: ['Poésie et sagesse', 'Prière, louange et sagesse'], en: ['Poetry and wisdom', 'Prayer, praise and wisdom'], b: 'JOB PSA PRO ECC SNG' },
+    { t: 'AT', c: '#4b1d3f', ct: 'rgba(75,29,63,.08)', fr: ['Grands prophètes', 'Les grands messages prophétiques'], en: ['Major prophets', 'The great prophetic messages'], b: 'ISA JER LAM EZK DAN' },
+    { t: 'AT', c: '#8a6a9a', ct: 'rgba(138,106,154,.10)', fr: ['Petits prophètes', 'Douze voix pour Israël'], en: ['Minor prophets', 'Twelve voices to Israel'], b: 'HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL' },
+    { t: 'NT', c: '#a8843f', ct: 'rgba(168,132,63,.10)', fr: ['Évangiles', 'La vie et l’œuvre de Jésus'], en: ['Gospels', 'The life and work of Jesus'], b: 'MAT MRK LUK JHN' },
+    { t: 'NT', c: '#b7708f', ct: 'rgba(183,112,143,.10)', fr: ['Actes', 'La naissance de l’Église'], en: ['Acts', 'The birth of the Church'], b: 'ACT' },
+    { t: 'NT', c: '#4b1d3f', ct: 'rgba(75,29,63,.08)', fr: ['Épîtres de Paul', 'Lettres aux Églises et aux disciples'], en: ['Letters of Paul', 'Letters to churches and disciples'], b: 'ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM' },
+    { t: 'NT', c: '#5f826a', ct: 'rgba(95,130,106,.10)', fr: ['Épîtres générales', 'Lettres à tous les croyants'], en: ['General letters', 'Letters to all believers'], b: 'HEB JAS 1PE 2PE 1JN 2JN 3JN JUD' },
+    { t: 'NT', c: '#8a6a9a', ct: 'rgba(138,106,154,.10)', fr: ['Prophétie', 'La victoire finale de l’Agneau'], en: ['Prophecy', 'The final victory of the Lamb'], b: 'REV' }
+  ];
+  var ABR = {
+    fr: 'Gn Ex Lv Nb Dt Jos Jg Rt 1S 2S 1R 2R 1Ch 2Ch Esd Né Est Jb Ps Pr Ec Ct Es Jr Lm Ez Dn Os Jl Am Ab Jon Mi Na Ha So Ag Za Ml Mt Mc Lc Jn Ac Rm 1Co 2Co Ga Ep Ph Col 1Th 2Th 1Tm 2Tm Tt Phm Hé Jc 1P 2P 1Jn 2Jn 3Jn Jd Ap',
+    en: 'Gen Ex Lev Num Deut Josh Judg Ruth 1Sam 2Sam 1Kgs 2Kgs 1Chr 2Chr Ezra Neh Esth Job Ps Prov Eccl Song Isa Jer Lam Ezek Dan Hos Joel Amos Obad Jonah Mic Nah Hab Zeph Hag Zech Mal Matt Mark Luke John Acts Rom 1Cor 2Cor Gal Eph Phil Col 1Th 2Th 1Tim 2Tim Titus Phlm Heb Jas 1Pet 2Pet 1Jn 2Jn 3Jn Jude Rev'
+  };
+  var SUM = {
+    GEN: ['Les commencements : création, chute et promesse', 'Beginnings: creation, the fall and the promise'],
+    EXO: ['Dieu délivre son peuple d’Égypte', 'God delivers his people from Egypt'],
+    LEV: ['La sainteté et le culte rendu à Dieu', 'Holiness and the worship of God'],
+    NUM: ['Quarante ans de marche au désert', 'Forty years in the wilderness'],
+    DEU: ['Moïse rappelle la Loi avant la Terre promise', 'Moses restates the Law before the Promised Land'],
+    JOS: ['La conquête de la Terre promise', 'The conquest of the Promised Land'],
+    JDG: ['Chutes et délivrances au temps des juges', 'Falls and deliverances in the time of the judges'],
+    RUT: ['Une histoire de fidélité et de rédemption', 'A story of loyalty and redemption'],
+    '1SA': ['Samuel, Saül et l’onction de David', 'Samuel, Saul and the anointing of David'],
+    '2SA': ['Le règne de David', 'The reign of David'],
+    '1KI': ['Salomon, le Temple et le royaume divisé', 'Solomon, the Temple and the divided kingdom'],
+    '2KI': ['Des rois d’Israël et de Juda jusqu’à l’exil', 'Kings of Israel and Judah up to the exile'],
+    '1CH': ['L’histoire de David revue pour le culte', 'David’s story retold for worship'],
+    '2CH': ['Les rois de Juda et le Temple', 'The kings of Judah and the Temple'],
+    EZR: ['Le retour de l’exil et la reconstruction du Temple', 'The return from exile and the rebuilt Temple'],
+    NEH: ['La reconstruction des murailles de Jérusalem', 'Rebuilding the walls of Jerusalem'],
+    EST: ['Une reine courageuse sauve son peuple', 'A courageous queen saves her people'],
+    JOB: ['La foi face à la souffrance', 'Faith in the face of suffering'],
+    PSA: ['Cent cinquante prières et chants de louange', 'One hundred and fifty prayers and songs of praise'],
+    PRO: ['La sagesse pour la vie de tous les jours', 'Wisdom for everyday life'],
+    ECC: ['Le sens de la vie sous le soleil', 'The meaning of life under the sun'],
+    SNG: ['Le chant de l’amour', 'The song of love'],
+    ISA: ['Le Messie annoncé et le salut promis', 'The coming Messiah and promised salvation'],
+    JER: ['L’appel à revenir à Dieu et la nouvelle alliance', 'A call to return to God and the new covenant'],
+    LAM: ['Les larmes sur Jérusalem', 'Tears over Jerusalem'],
+    EZK: ['La gloire de Dieu et la restauration', 'The glory of God and restoration'],
+    DAN: ['Fidèles en exil, visions des royaumes', 'Faithful in exile, visions of kingdoms'],
+    HOS: ['L’amour fidèle de Dieu pour un peuple infidèle', 'God’s faithful love for an unfaithful people'],
+    JOL: ['Le jour de l’Éternel et l’Esprit répandu', 'The day of the Lord and the outpoured Spirit'],
+    AMO: ['La justice de Dieu pour les opprimés', 'God’s justice for the oppressed'],
+    OBA: ['Le jugement d’Édom', 'The judgment of Edom'],
+    JON: ['Un prophète fuit et Dieu fait grâce', 'A runaway prophet and a gracious God'],
+    MIC: ['Pratiquer la justice, aimer la miséricorde', 'Do justice, love mercy'],
+    NAM: ['La chute de Ninive', 'The fall of Nineveh'],
+    HAB: ['Le juste vivra par la foi', 'The just shall live by faith'],
+    ZEP: ['Le jour de l’Éternel et la joie restaurée', 'The day of the Lord and restored joy'],
+    HAG: ['Rebâtir la maison de Dieu', 'Rebuild the house of God'],
+    ZEC: ['Visions d’espérance et le Roi qui vient', 'Visions of hope and the coming King'],
+    MAL: ['Revenez à moi, dit l’Éternel', 'Return unto me, saith the Lord'],
+    MAT: ['Jésus, le Roi promis', 'Jesus, the promised King'],
+    MRK: ['Jésus, le Serviteur en action', 'Jesus, the Servant in action'],
+    LUK: ['Jésus, le Sauveur de tous', 'Jesus, the Saviour of all'],
+    JHN: ['Jésus, le Fils de Dieu qui donne la vie', 'Jesus, the Son of God who gives life'],
+    ACT: ['L’Esprit saint et l’Évangile jusqu’aux extrémités de la terre', 'The Holy Spirit and the Gospel to the ends of the earth'],
+    ROM: ['Le salut par la grâce, au moyen de la foi', 'Salvation by grace through faith'],
+    '1CO': ['Une Église appelée à la sainteté et à l’amour', 'A church called to holiness and love'],
+    '2CO': ['La force de Dieu dans la faiblesse', 'God’s strength in weakness'],
+    GAL: ['La liberté en Christ', 'Freedom in Christ'],
+    EPH: ['Nos richesses en Christ', 'Our riches in Christ'],
+    PHP: ['La joie en toutes circonstances', 'Joy in every circumstance'],
+    COL: ['Christ au-dessus de tout', 'Christ above all'],
+    '1TH': ['L’espérance du retour du Seigneur', 'The hope of the Lord’s return'],
+    '2TH': ['Tenir ferme jusqu’au retour de Christ', 'Standing firm until Christ returns'],
+    '1TI': ['Conseils pour conduire l’Église', 'Guidance for leading the Church'],
+    '2TI': ['Le dernier message de Paul : garde la foi', 'Paul’s last message: keep the faith'],
+    TIT: ['La saine doctrine et les bonnes œuvres', 'Sound doctrine and good works'],
+    PHM: ['Le pardon et la réconciliation', 'Forgiveness and reconciliation'],
+    HEB: ['Jésus, plus grand que tout', 'Jesus, greater than all'],
+    JAS: ['Une foi vivante qui agit', 'A living faith that acts'],
+    '1PE': ['L’espérance au milieu des épreuves', 'Hope in the midst of trials'],
+    '2PE': ['Grandir dans la grâce et la connaissance', 'Growing in grace and knowledge'],
+    '1JN': ['Dieu est lumière, Dieu est amour', 'God is light, God is love'],
+    '2JN': ['Marcher dans la vérité et l’amour', 'Walking in truth and love'],
+    '3JN': ['L’hospitalité envers les serviteurs de Dieu', 'Hospitality to God’s servants'],
+    JUD: ['Combattre pour la foi', 'Contend for the faith'],
+    REV: ['Christ revient : toutes choses nouvelles', 'Christ returns: all things made new']
+  };
+  var readch = store.get('readch', {}); // "BOOK" -> [chapters]
+  function markRead(b, c) { var a = readch[b] || (readch[b] = []); if (a.indexOf(+c) < 0) { a.push(+c); store.set('readch', readch); } }
+  function catOf(id) { for (var i = 0; i < CATS.length; i++) if ((' ' + CATS[i].b + ' ').indexOf(' ' + id + ' ') >= 0) return CATS[i]; return CATS[0]; }
+  function abbr(id) { var i = META.books.map(function (b) { return b.id; }).indexOf(id); return ABR[LANG].split(' ')[i] || id; }
+  function libHTML(tab) {
+    var L = LANG === 'fr' ? 0 : 1, last = hist[0] ? hist[0].split('.') : null, n = 0;
+    var tabs = [['all', LANG === 'fr' ? 'Toute la Bible' : 'Whole Bible'], ['AT', T.ot], ['NT', T.nt]];
+    var h = '<div class="eb-lib" data-tab="' + tab + '"><div class="eb-lib-top">' +
+      '<div class="eb-lib-tabs">' + tabs.map(function (x) { return '<button data-tab="' + x[0] + '"' + (x[0] === tab ? ' class="on"' : '') + '>' + esc(x[1]) + '</button>'; }).join('') + '</div>' +
+      '<label class="eb-lib-find"><span aria-hidden="true">⌕</span><input type="search" placeholder="' + esc(LANG === 'fr' ? 'Trouver un livre… (ex. Jean, Ps)' : 'Find a book… (e.g. John, Ps)') + '" aria-label="' + esc(LANG === 'fr' ? 'Trouver un livre' : 'Find a book') + '"></label>' +
+      (last && BOOKS[last[0]] ? '<button class="eb-lib-resume" data-gc="' + last[0] + '.' + last[1] + '"><small>' + esc(LANG === 'fr' ? 'Reprendre' : 'Continue') + '</small>' + esc(refLabel(last[0], last[1])) + ' →</button>' : '') +
+      '</div>';
+    CATS.forEach(function (C) {
+      if (tab !== 'all' && C.t !== tab) return;
+      var ids = C.b.split(' ');
+      h += '<section class="eb-cat" style="--c:' + C.c + ';--ct:' + C.ct + '"><div class="eb-cat-h"><span class="dot"></span><b>' + esc(C[LANG][0]) + '</b><small>' + esc(C[LANG][1]) + ' · ' + ids.length + ' ' + (LANG === 'fr' ? (ids.length > 1 ? 'livres' : 'livre') : (ids.length > 1 ? 'books' : 'book')) + '</small></div><div class="eb-lib-grid">' +
+        ids.map(function (id) {
+          var B = BOOKS[id], rd = (readch[id] || []).length, pc = Math.round(100 * rd / B.ch);
+          return '<button class="eb-tile" data-bk="' + id + '" data-q="' + esc(strip((B.fr + ' ' + B.en + ' ' + abbr(id)).toLowerCase())) + '" style="--i:' + (n++) + '">' +
+            '<span class="ab">' + esc(abbr(id)) + '</span><span class="nm">' + esc(B[LANG]) + '</span>' +
+            '<span class="sm">' + esc(SUM[id] ? SUM[id][L] : '') + '</span>' +
+            '<span class="mt">' + B.ch + ' ' + (LANG === 'fr' ? 'chap.' : 'ch.') + (rd ? ' · ' + pc + ' %' : '') + '</span>' +
+            '<span class="pg"><i style="width:' + pc + '%"></i></span></button>';
+        }).join('') + '</div></section>';
+    });
+    return h + '<p class="eb-muted eb-lib-none" hidden>' + esc(LANG === 'fr' ? 'Aucun livre ne correspond.' : 'No book matches.') + '</p></div>';
+  }
+  function strip(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function chapHTML(id) {
+    var B = BOOKS[id], C = catOf(id), L = LANG === 'fr' ? 0 : 1, rd = readch[id] || [], cur = (hist.filter(function (k) { return k.split('.')[0] === id; })[0] || '').split('.')[1];
+    var cs = ''; for (var i = 1; i <= B.ch; i++) cs += '<button data-c="' + i + '" class="' + (rd.indexOf(i) >= 0 ? 'rd' : '') + (String(i) === cur ? ' cur' : '') + '" style="--i:' + i + '">' + i + '</button>';
+    return '<div class="eb-chv" style="--c:' + C.c + ';--ct:' + C.ct + '">' +
+      '<button class="eb-back" data-back>← ' + esc(LANG === 'fr' ? 'Tous les livres' : 'All books') + '</button>' +
+      '<div class="eb-chv-h"><span class="ab">' + esc(abbr(id)) + '</span><div><small>' + esc(C[LANG][0]) + '</small><h3>' + esc(B[LANG]) + '</h3><p>' + esc(SUM[id] ? SUM[id][L] : '') + '</p></div></div>' +
+      '<div class="eb-row"><button class="eb-btn pri" data-c="' + (cur || 1) + '">' + esc(cur ? (LANG === 'fr' ? 'Reprendre au chapitre ' : 'Continue at chapter ') + cur : (LANG === 'fr' ? 'Commencer la lecture' : 'Start reading')) + ' →</button><span class="eb-muted">' + B.ch + ' ' + (LANG === 'fr' ? 'chapitres' : 'chapters') + (rd.length ? ' · ' + rd.length + ' ' + (LANG === 'fr' ? 'lus' : 'read') : '') + '</span></div>' +
+      '<div class="eb-chg">' + cs + '</div></div>';
+  }
+  // Monte la bibliothèque dans un conteneur ; onPick(id, c) ouvre la lecture
+  function mountLib(box, tab, onPick) {
+    var show = function (t) { tab = t; box.innerHTML = libHTML(t); store.set('libtab', t); };
+    show(tab || store.get('libtab', 'all'));
+    box.oninput = function (e) {
+      if (!e.target.matches('.eb-lib-find input')) return;
+      var q = strip(e.target.value.trim().toLowerCase()), any = false;
+      $$('.eb-tile', box).forEach(function (t) { var ok = !q || (' ' + t.getAttribute('data-q')).indexOf(' ' + q) >= 0; t.hidden = !ok; any = any || ok; });
+      $$('.eb-cat', box).forEach(function (s) { s.hidden = !$$('.eb-tile', s).some(function (t) { return !t.hidden; }); });
+      $('.eb-lib-none', box).hidden = any;
+    };
+    box.onkeydown = function (e) { if (e.key === 'Enter' && e.target.matches('.eb-lib-find input')) { var f = $$('.eb-tile', box).filter(function (t) { return !t.hidden; })[0]; if (f) f.click(); } };
+    box.onclick = function (e) {
+      var t = e.target.closest('[data-tab]'); if (t && t.tagName === 'BUTTON') { show(t.getAttribute('data-tab')); return; }
+      var r = e.target.closest('[data-gc]'); if (r) { var q = r.getAttribute('data-gc').split('.'); return onPick(q[0], +q[1]); }
+      var bk = e.target.closest('[data-bk]');
+      if (bk) { var id = bk.getAttribute('data-bk'); if (BOOKS[id].ch === 1) return onPick(id, 1); box.innerHTML = chapHTML(id); box.setAttribute('data-book', id); var top = box.getBoundingClientRect().top, sc = box.closest('.eb-modal'), off = sc ? 16 : ((UI.top ? UI.top.offsetHeight : 0) + (parseInt(getComputedStyle(ROOT).getPropertyValue('--ebtop'), 10) || 0) + 14); if (top < off || top > window.innerHeight * 0.6) { if (sc) sc.scrollTop += top - off; else window.scrollTo({ top: window.scrollY + top - off, behavior: 'smooth' }); } return; }
+      if (e.target.closest('[data-back]')) { show(tab); return; }
+      var c = e.target.closest('[data-c]'); if (c) return onPick(box.getAttribute('data-book'), +c.getAttribute('data-c'));
+    };
+  }
+
   /* ---------- Sélecteur de livres ---------- */
   function modal(html) {
     var m = el('div', 'eb-modal'); m.innerHTML = '<div class="eb-mbox">' + html + '</div>'; document.body.appendChild(m);
@@ -706,20 +881,12 @@
     m.addEventListener('click', function (e) { if (e.target === m || e.target.closest('[data-close]')) m.remove(); });
     return m;
   }
-  function bookPicker() {
-    var mk = function (t) {
-      return META.books.filter(function (b) { return b.t === t; }).map(function (b) { return '<button data-b="' + b.id + '"' + (b.id === S.b ? ' class="on"' : '') + '>' + esc(b[LANG]) + '</button>'; }).join('');
-    };
-    var m = modal('<div class="eb-row" style="justify-content:space-between"><h3>' + esc(T.books) + '</h3><button class="eb-btn" data-close>✕</button></div>' +
-      '<h4 class="eb-vtag">' + esc(T.ot) + '</h4><div class="eb-bgrid">' + mk('AT') + '</div><h4 class="eb-vtag">' + esc(T.nt) + '</h4><div class="eb-bgrid">' + mk('NT') + '</div>');
-    m.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-b]'); if (!b) return;
-      var id = b.getAttribute('data-b'), n = BOOKS[id].ch;
-      if (n === 1) { m.remove(); return go(id, 1); }
-      var cs = ''; for (var i = 1; i <= n; i++) cs += '<button data-c="' + i + '">' + i + '</button>';
-      $('.eb-mbox', m).innerHTML = '<div class="eb-row" style="justify-content:space-between"><h3>' + esc(BOOKS[id][LANG]) + '</h3><button class="eb-btn" data-close>✕</button></div><div class="eb-cgrid">' + cs + '</div>';
-      $('.eb-mbox', m).onclick = function (ev) { var c = ev.target.closest('[data-c]'); if (c) { m.remove(); go(id, +c.getAttribute('data-c')); } };
-    });
+  function bookPicker(id) {
+    var m = modal('<div class="eb-row" style="justify-content:space-between;margin-top:0"><h3>' + esc(T.books) + '</h3><button class="eb-btn" data-close>✕</button></div><div class="eb-libbox"></div>');
+    $('.eb-mbox', m).classList.add('wide');
+    var box = $('.eb-libbox', m);
+    mountLib(box, null, function (b, c) { m.remove(); go(b, c); });
+    if (id) { var t = $('[data-bk="' + id + '"]', box); if (t) t.click(); }
   }
 
   /* ---------- Réglages ---------- */
@@ -853,12 +1020,13 @@
         ' <button class="eb-btn" data-pd="' + pid + '">✓ ' + esc(T.markread) + '</button></div>';
     }).join('');
     UI.read.innerHTML = '<div class="eb-hero"><div class="eb-hero-in"><h4>✦ ' + esc(T.votd) + '</h4><div class="eb-votd eb-vt">…</div><p class="eb-muted eb-vr"></p><button class="eb-btn pri" data-gv="' + vk + '">' + esc(T.go) + ' →</button></div></div>' +
+      '<div class="eb-libbox"></div>' +
       '<div class="eb-home">' +
       '<div class="eb-card"><h4>' + esc(T.plans) + '</h4>' + plansHTML + '</div>' +
       '<div class="eb-card"><h4>' + esc(T.history) + '</h4>' + (hist.length ? hist.slice(0, 12).map(function (k) { var p = k.split('.'); return '<button class="eb-chip" data-gc="' + k + '">' + esc(refLabel(p[0], p[1])) + '</button>'; }).join('') : '<p class="eb-muted">' + esc(T.empty) + '</p>') + '</div>' +
-      '</div><h3 class="eb-ctitle" style="font-size:26px">' + esc(T.ot) + '</h3><div class="eb-bgrid ot">' + META.books.filter(function (b) { return b.t === 'AT'; }).map(function (b) { return '<button data-b="' + b.id + '">' + esc(b[LANG]) + '</button>'; }).join('') + '</div>' +
-      '<h3 class="eb-ctitle" style="font-size:26px">' + esc(T.nt) + '</h3><div class="eb-bgrid nt">' + META.books.filter(function (b) { return b.t === 'NT'; }).map(function (b) { return '<button data-b="' + b.id + '">' + esc(b[LANG]) + '</button>'; }).join('') + '</div>';
-    starfield($('.eb-hero', UI.read), 420);
+      '</div>';
+    starfield($('.eb-hero', UI.read), 520, true);
+    mountLib($('.eb-libbox', UI.read), null, function (id, c) { go(id, c); });
     mapKey(vk, 'en', VERS[S.v].lang).then(function (k2) {
       getVerse(S.v, k2).then(function (t) { var p = k2.split('.'); $('.eb-vt', UI.read).textContent = plain(t); $('.eb-vr', UI.read).textContent = refLabel(p[0], p[1], p[2]) + ' · ' + VERS[S.v].short; $('[data-gv]', UI.read).setAttribute('data-gv', k2); });
     });
@@ -870,11 +1038,7 @@
       var pd = e.target.closest('[data-pd]'); if (pd) { var st = plans[pd.getAttribute('data-pd')]; st.done.push(Date.now()); store.set('plans', plans); return home(); }
     };
   }
-  function bookPickerFor(id) {
-    var n = BOOKS[id].ch, cs = ''; for (var i = 1; i <= n; i++) cs += '<button data-c="' + i + '">' + i + '</button>';
-    var m = modal('<div class="eb-row" style="justify-content:space-between"><h3>' + esc(BOOKS[id][LANG]) + '</h3><button class="eb-btn" data-close>✕</button></div><div class="eb-cgrid">' + cs + '</div>');
-    $('.eb-mbox', m).onclick = function (ev) { var c = ev.target.closest('[data-c]'); if (c) { m.remove(); go(id, +c.getAttribute('data-c')); } };
-  }
+  function bookPickerFor(id) { bookPicker(id); }
 
   /* ---------- Lecture audio ---------- */
   function listen(btn) {
