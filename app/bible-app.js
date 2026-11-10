@@ -246,7 +246,17 @@
     '.eb-chg{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;margin-top:14px}.eb-chg button{aspect-ratio:1;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px;font-weight:600;transition:transform .2s,background .2s,color .2s;animation:ebup .4s both;animation-delay:calc(var(--i) * 6ms)}.eb-chg button:hover{transform:scale(1.08);background:var(--c);color:#fff;border-color:var(--c)}.eb-chg button.rd{background:var(--ct);border-color:var(--c);color:var(--c)}.eb-chg button.cur{box-shadow:0 0 0 3px var(--c)}',
     '.eb-mbox.wide{max-width:1100px}.t-dark .eb-tile::after{background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.12),rgba(255,255,255,0))}',
     '@media(max-width:760px){.eb-lib-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.eb-tile{padding:12px}.eb-tile .ab{font-size:26px}.eb-chv-h{padding:14px;gap:12px}.eb-chv-h .ab{width:64px;height:64px;font-size:24px;border-radius:18px}#ebc-bible .eb-chv-h h3,.eb-mbox .eb-chv-h h3{font-size:27px}.eb-lib-resume{width:100%}.eb-lib-tabs{width:100%;justify-content:space-between}.eb-lib-tabs button{padding:8px 10px;font-size:13px}#ebc-bible{margin-top:22px}}',
-    '@media (prefers-reduced-motion:reduce){.eb-tile,.eb-chv,.eb-chg button{animation:none}}'
+    '@media (prefers-reduced-motion:reduce){.eb-tile,.eb-chv,.eb-chg button{animation:none}}',
+    '.eb-toc{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:24px 40px}.eb-tcol{min-width:0}.eb-trow{min-width:0}.eb-trow .nm{min-width:0;flex:0 1 auto}',
+    '.eb-tcol{--tint:rgba(168,132,63,.09)}.eb-tcol:nth-child(2){--tint:rgba(95,130,106,.10)}',
+    '.eb-tcol-h{display:flex;align-items:baseline;gap:10px;padding-bottom:10px;margin-bottom:8px;border-bottom:2px solid var(--c)}.eb-tcol-h b{font-family:"Cormorant Garamond",Georgia,serif;font-size:28px;font-weight:700;color:var(--ink)}.eb-tcol-h small{color:var(--mut);font-size:13.5px}',
+    '.eb-tlist{list-style:none!important;margin:0!important;padding:0!important;columns:auto 245px;column-gap:26px}.eb-tlist li{break-inside:avoid;margin:0!important;padding:0!important;list-style:none!important}.eb-tlist li::before,.eb-tlist li::marker{content:none!important}',
+    '.eb-trow{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;padding:6px 8px;border-radius:8px;text-align:left;color:var(--ink);cursor:pointer;transition:background .15s}.eb-trow:hover,.eb-trow:focus-visible{background:var(--tint);outline:0}',
+    '.eb-trow .no{flex:0 0 34px;font-size:11.5px;font-weight:600;color:var(--c);text-align:right;font-family:"Jost",sans-serif}',
+    '.eb-trow .nm{font-family:"Cormorant Garamond",Georgia,serif;font-size:19px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}.eb-trow:hover .nm{color:var(--c)}',
+    '.eb-trow .dl{flex:1 1 auto;min-width:10px;border-bottom:1px dotted rgba(75,29,63,.22);transform:translateY(-4px)}',
+    '.eb-trow .ch{font-size:12.5px;color:var(--mut);white-space:nowrap}.eb-trow .ch i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-right:6px;vertical-align:middle}',
+    '@media(max-width:860px){.eb-toc{grid-template-columns:minmax(0,1fr)}}'
   ].join('\n');
 
   /* ---------- Ciel étoilé animé ---------- */
@@ -819,57 +829,63 @@
   function markRead(b, c) { var a = readch[b] || (readch[b] = []); if (a.indexOf(+c) < 0) { a.push(+c); store.set('readch', readch); } }
   function catOf(id) { for (var i = 0; i < CATS.length; i++) if ((' ' + CATS[i].b + ' ').indexOf(' ' + id + ' ') >= 0) return CATS[i]; return CATS[0]; }
   function abbr(id) { var i = META.books.map(function (b) { return b.id; }).indexOf(id); return ABR[LANG].split(' ')[i] || id; }
-  function libHTML(tab) {
-    var L = LANG === 'fr' ? 0 : 1, last = hist[0] ? hist[0].split('.') : null, n = 0;
-    var tabs = [['all', LANG === 'fr' ? 'Toute la Bible' : 'Whole Bible'], ['AT', T.ot], ['NT', T.nt]];
-    var h = '<div class="eb-lib" data-tab="' + tab + '"><div class="eb-lib-top">' +
-      '<div class="eb-lib-tabs">' + tabs.map(function (x) { return '<button data-tab="' + x[0] + '"' + (x[0] === tab ? ' class="on"' : '') + '>' + esc(x[1]) + '</button>'; }).join('') + '</div>' +
-      '<label class="eb-lib-find"><span aria-hidden="true">⌕</span><input type="search" placeholder="' + esc(LANG === 'fr' ? 'Trouver un livre… (ex. Jean, Ps)' : 'Find a book… (e.g. John, Ps)') + '" aria-label="' + esc(LANG === 'fr' ? 'Trouver un livre' : 'Find a book') + '"></label>' +
-      (last && BOOKS[last[0]] ? '<button class="eb-lib-resume" data-gc="' + last[0] + '.' + last[1] + '"><small>' + esc(LANG === 'fr' ? 'Reprendre' : 'Continue') + '</small>' + esc(refLabel(last[0], last[1])) + ' →</button>' : '') +
-      '</div>';
-    CATS.forEach(function (C) {
-      if (tab !== 'all' && C.t !== tab) return;
-      var ids = C.b.split(' ');
-      h += '<section class="eb-cat" style="--c:' + C.c + ';--ct:' + C.ct + '"><div class="eb-cat-h"><span class="dot"></span><b>' + esc(C[LANG][0]) + '</b><small>' + esc(C[LANG][1]) + ' · ' + ids.length + ' ' + (LANG === 'fr' ? (ids.length > 1 ? 'livres' : 'livre') : (ids.length > 1 ? 'books' : 'book')) + '</small></div><div class="eb-lib-grid">' +
-        ids.map(function (id) {
-          var B = BOOKS[id], rd = (readch[id] || []).length, pc = Math.round(100 * rd / B.ch);
-          return '<button class="eb-tile" data-bk="' + id + '" data-q="' + esc(strip((B.fr + ' ' + B.en + ' ' + abbr(id)).toLowerCase())) + '" style="--i:' + (n++) + '">' +
-            '<span class="ab">' + esc(abbr(id)) + '</span><span class="nm">' + esc(B[LANG]) + '</span>' +
-            '<span class="sm">' + esc(SUM[id] ? SUM[id][L] : '') + '</span>' +
-            '<span class="mt">' + B.ch + ' ' + (LANG === 'fr' ? 'chap.' : 'ch.') + (rd ? ' · ' + pc + ' %' : '') + '</span>' +
-            '<span class="pg"><i style="width:' + pc + '%"></i></span></button>';
-        }).join('') + '</div></section>';
+  var TCOL = { AT: '#a8843f', NT: '#5f826a' };
+  function sortKey(n) { return strip(n.toLowerCase()).replace(/^(\d)\s*(.*)$/, '$2 $1'); }
+  function libHTML(order) {
+    var FR = LANG === 'fr', last = hist[0] ? hist[0].split('.') : null;
+    var h = '<div class="eb-lib"><div class="eb-lib-top">' +
+      '<div class="eb-lib-tabs" role="group">' + [['bible', FR ? 'Ordre de la Bible' : 'Bible order'], ['az', FR ? 'Ordre alphabétique' : 'Alphabetical']].map(function (x) { return '<button type="button" data-order="' + x[0] + '"' + (x[0] === order ? ' class="on"' : '') + '>' + esc(x[1]) + '</button>'; }).join('') + '</div>' +
+      '<label class="eb-lib-find"><span aria-hidden="true">⌕</span><input type="search" placeholder="' + esc(FR ? 'Trouver un livre…' : 'Find a book…') + '" aria-label="' + esc(FR ? 'Trouver un livre' : 'Find a book') + '"></label>' +
+      (last && BOOKS[last[0]] ? '<button class="eb-lib-resume" data-gc="' + last[0] + '.' + last[1] + '"><small>' + esc(FR ? 'Reprendre ma lecture' : 'Continue reading') + '</small>' + esc(refLabel(last[0], last[1])) + ' →</button>' : '') +
+      '</div><div class="eb-toc">';
+    [['AT', T.ot], ['NT', T.nt]].forEach(function (tt) {
+      var list = META.books.filter(function (b) { return b.t === tt[0]; }).map(function (b, i) { return { b: b, n: i + 1 }; });
+      if (order === 'az') list.sort(function (x, y) { return sortKey(x.b[LANG]) < sortKey(y.b[LANG]) ? -1 : 1; });
+      h += '<section class="eb-tcol" style="--c:' + TCOL[tt[0]] + '"><div class="eb-tcol-h"><b>' + esc(tt[1]) + '</b><small>' + list.length + ' ' + (FR ? 'livres' : 'books') + '</small></div><ol class="eb-tlist">' +
+        list.map(function (x) {
+          var id = x.b.id, rd = (readch[id] || []).length;
+          return '<li><button class="eb-trow' + (rd ? ' started' : '') + '" data-bk="' + id + '" data-q="' + esc(strip((x.b.fr + ' ' + x.b.en + ' ' + abbr(id)).toLowerCase())) + '">' +
+            '<span class="no">' + (order === 'az' ? esc(abbr(id)) : x.n) + '</span><span class="nm">' + esc(x.b[LANG]) + '</span><span class="dl"></span>' +
+            '<span class="ch">' + (rd ? '<i title="' + esc(rd + ' ' + (FR ? 'lus' : 'read')) + '"></i>' : '') + x.b.ch + ' ' + (FR ? 'chap.' : 'ch.') + '</span></button></li>';
+        }).join('') + '</ol></section>';
     });
-    return h + '<p class="eb-muted eb-lib-none" hidden>' + esc(LANG === 'fr' ? 'Aucun livre ne correspond.' : 'No book matches.') + '</p></div>';
+    return h + '</div><p class="eb-muted eb-lib-none" hidden>' + esc(FR ? 'Aucun livre ne correspond.' : 'No book matches.') + '</p></div>';
   }
   function strip(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, ''); }
   function chapHTML(id) {
-    var B = BOOKS[id], C = catOf(id), L = LANG === 'fr' ? 0 : 1, rd = readch[id] || [], cur = (hist.filter(function (k) { return k.split('.')[0] === id; })[0] || '').split('.')[1];
+    var B = BOOKS[id], C = { c: TCOL[B.t], ct: B.t === 'AT' ? 'rgba(168,132,63,.12)' : 'rgba(95,130,106,.12)' }, L = LANG === 'fr' ? 0 : 1, rd = readch[id] || [], cur = (hist.filter(function (k) { return k.split('.')[0] === id; })[0] || '').split('.')[1];
     var cs = ''; for (var i = 1; i <= B.ch; i++) cs += '<button data-c="' + i + '" class="' + (rd.indexOf(i) >= 0 ? 'rd' : '') + (String(i) === cur ? ' cur' : '') + '" style="--i:' + i + '">' + i + '</button>';
     return '<div class="eb-chv" style="--c:' + C.c + ';--ct:' + C.ct + '">' +
       '<button class="eb-back" data-back>← ' + esc(LANG === 'fr' ? 'Tous les livres' : 'All books') + '</button>' +
-      '<div class="eb-chv-h"><span class="ab">' + esc(abbr(id)) + '</span><div><small>' + esc(C[LANG][0]) + '</small><h3>' + esc(B[LANG]) + '</h3><p>' + esc(SUM[id] ? SUM[id][L] : '') + '</p></div></div>' +
+      '<div class="eb-chv-h"><span class="ab">' + esc(abbr(id)) + '</span><div><small>' + esc(B.t === 'AT' ? T.ot : T.nt) + '</small><h3>' + esc(B[LANG]) + '</h3><p>' + esc(SUM[id] ? SUM[id][L] : '') + '</p></div></div>' +
       '<div class="eb-row"><button class="eb-btn pri" data-c="' + (cur || 1) + '">' + esc(cur ? (LANG === 'fr' ? 'Reprendre au chapitre ' : 'Continue at chapter ') + cur : (LANG === 'fr' ? 'Commencer la lecture' : 'Start reading')) + ' →</button><span class="eb-muted">' + B.ch + ' ' + (LANG === 'fr' ? 'chapitres' : 'chapters') + (rd.length ? ' · ' + rd.length + ' ' + (LANG === 'fr' ? 'lus' : 'read') : '') + '</span></div>' +
       '<div class="eb-chg">' + cs + '</div></div>';
   }
-  // Monte la bibliothèque dans un conteneur ; onPick(id, c) ouvre la lecture
+  // Monte la table des matières dans un conteneur ; onPick(id, c) ouvre la lecture
   function mountLib(box, tab, onPick) {
-    var show = function (t) { tab = t; box.innerHTML = libHTML(t); store.set('libtab', t); };
-    show(tab || store.get('libtab', 'all'));
+    var order = store.get('liborder', 'bible');
+    var show = function () { box.innerHTML = libHTML(order); box.removeAttribute('data-book'); };
+    show();
     box.oninput = function (e) {
       if (!e.target.matches('.eb-lib-find input')) return;
       var q = strip(e.target.value.trim().toLowerCase()), any = false;
-      $$('.eb-tile', box).forEach(function (t) { var ok = !q || (' ' + t.getAttribute('data-q')).indexOf(' ' + q) >= 0; t.hidden = !ok; any = any || ok; });
-      $$('.eb-cat', box).forEach(function (s) { s.hidden = !$$('.eb-tile', s).some(function (t) { return !t.hidden; }); });
+      $$('.eb-trow', box).forEach(function (t) { var ok = !q || (' ' + t.getAttribute('data-q')).indexOf(' ' + q) >= 0; t.parentNode.hidden = !ok; any = any || ok; });
+      $$('.eb-tcol', box).forEach(function (s) { s.hidden = !$$('li', s).some(function (li) { return !li.hidden; }); });
       $('.eb-lib-none', box).hidden = any;
     };
-    box.onkeydown = function (e) { if (e.key === 'Enter' && e.target.matches('.eb-lib-find input')) { var f = $$('.eb-tile', box).filter(function (t) { return !t.hidden; })[0]; if (f) f.click(); } };
+    box.onkeydown = function (e) { if (e.key === 'Enter' && e.target.matches('.eb-lib-find input')) { e.preventDefault(); var f = $$('.eb-trow', box).filter(function (t) { return !t.parentNode.hidden; })[0]; if (f && e.target.value.trim()) f.click(); } };
     box.onclick = function (e) {
-      var t = e.target.closest('[data-tab]'); if (t && t.tagName === 'BUTTON') { show(t.getAttribute('data-tab')); return; }
+      var o = e.target.closest('[data-order]'); if (o) { order = o.getAttribute('data-order'); store.set('liborder', order); show(); return; }
       var r = e.target.closest('[data-gc]'); if (r) { var q = r.getAttribute('data-gc').split('.'); return onPick(q[0], +q[1]); }
       var bk = e.target.closest('[data-bk]');
-      if (bk) { var id = bk.getAttribute('data-bk'); if (BOOKS[id].ch === 1) return onPick(id, 1); box.innerHTML = chapHTML(id); box.setAttribute('data-book', id); var top = box.getBoundingClientRect().top, sc = box.closest('.eb-modal'), off = sc ? 16 : ((UI.top ? UI.top.offsetHeight : 0) + (parseInt(getComputedStyle(ROOT).getPropertyValue('--ebtop'), 10) || 0) + 14); if (top < off || top > window.innerHeight * 0.6) { if (sc) sc.scrollTop += top - off; else window.scrollTo({ top: window.scrollY + top - off, behavior: 'smooth' }); } return; }
-      if (e.target.closest('[data-back]')) { show(tab); return; }
+      if (bk) {
+        var id = bk.getAttribute('data-bk'); if (BOOKS[id].ch === 1) return onPick(id, 1);
+        box.innerHTML = chapHTML(id); box.setAttribute('data-book', id);
+        var top = box.getBoundingClientRect().top, sc = box.closest('.eb-modal'), off = sc ? 16 : ((UI.top ? UI.top.offsetHeight : 0) + (parseInt(getComputedStyle(ROOT).getPropertyValue('--ebtop'), 10) || 0) + 14);
+        if (top < off || top > window.innerHeight * 0.6) { if (sc) sc.scrollTop += top - off; else window.scrollTo({ top: window.scrollY + top - off, behavior: 'smooth' }); }
+        return;
+      }
+      if (e.target.closest('[data-back]')) { show(); return; }
       var c = e.target.closest('[data-c]'); if (c) return onPick(box.getAttribute('data-book'), +c.getAttribute('data-c'));
     };
   }
