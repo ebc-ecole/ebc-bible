@@ -5,6 +5,7 @@
   'use strict';
   var SCRIPT = document.currentScript;
   var BASE = (window.EBC_BIBLE_BASE || (SCRIPT && SCRIPT.src.replace(/app\/bible-app(\.min)?\.js.*$/, '')) || './');
+  var DV = (SCRIPT && (SCRIPT.src.match(/[?&][dv]=([\w.-]+)/) || [])[1]) || ''; var QS = DV ? '?v=' + DV : '';
   var ROOT = document.getElementById('ebc-bible');
   if (!ROOT) return;
   var LANG = (ROOT.getAttribute('data-lang') || (/\/en\//.test(location.pathname) ? 'en' : 'fr')) === 'en' ? 'en' : 'fr';
@@ -66,14 +67,14 @@
   };
   var cache = {};
   function getJSON(p) {
-    if (!cache[p]) cache[p] = fetch(BASE + 'data/' + p).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+    if (!cache[p]) cache[p] = fetch(BASE + 'data/' + p + QS).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
     return cache[p];
   }
   function getBook(ver, b) {
     var bk = BOOKS[b]; return getJSON(ver + '/' + (bk && bk.t === 'NT' ? 'NT' : 'OT') + '.json').then(function (d) { return d[b]; });
   }
   function getText(p) {
-    if (!cache[p]) cache[p] = fetch(BASE + 'data/' + p).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    if (!cache[p]) cache[p] = fetch(BASE + 'data/' + p + QS).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
     return cache[p];
   }
   function plain(t) { return t.replace(/\[([^\]|]+)\|[GH]\d+\]/g, '$1').replace(/[‹›]/g, ''); }

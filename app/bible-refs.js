@@ -6,13 +6,14 @@
   if (window.__ebcRefs) return; window.__ebcRefs = 1;
   var SCRIPT = document.currentScript;
   var BASE = window.EBC_BIBLE_BASE || (SCRIPT && SCRIPT.src.replace(/app\/bible-refs(\.min)?\.js.*$/, '')) || './';
+  var DV = (SCRIPT && (SCRIPT.src.match(/[?&][dv]=([\w.-]+)/) || [])[1]) || ''; var QS = DV ? '?v=' + DV : '';
   var EN = /^\/en\//.test(location.pathname) || (document.documentElement.lang || '').indexOf('en') === 0;
   if (document.getElementById('ebc-bible')) return; // pas sur la page Bible elle-même
   var VER = EN ? 'kjv' : 'lsg';
   var BIBLE_URL = EN ? '/en/pages/bible.html' : '/pages/bible.html';
   var META, AL = {}, RE = null, cache = {};
 
-  function getJSON(p) { if (!cache[p]) cache[p] = fetch(BASE + 'data/' + p).then(function (r) { return r.json(); }); return cache[p]; }
+  function getJSON(p) { if (!cache[p]) cache[p] = fetch(BASE + 'data/' + p + QS).then(function (r) { return r.json(); }); return cache[p]; }
   function strip(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, ''); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
